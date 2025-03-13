@@ -6,7 +6,7 @@ const CourseBox = () => {
       <div className="course-box">
         <a href="#">
           <img
-            src="images/courses/fareelancer.png"
+            src="/images/courses/fareelancer.png"
             alt="Course img"
             className="course-box__img"
           />
@@ -25,27 +25,27 @@ const CourseBox = () => {
             </div>
             <div className="course-box__rating">
               <img
-                src="images/svgs/star.svg"
+                src="/images/svgs/star.svg"
                 alt="rating"
                 className="course-box__star"
               />
               <img
-                src="images/svgs/star_fill.svg"
+                src="/images/svgs/star_fill.svg"
                 alt="rating"
                 className="course-box__star"
               />
               <img
-                src="images/svgs/star_fill.svg"
+                src="/images/svgs/star_fill.svg"
                 alt="rating"
                 className="course-box__star"
               />
               <img
-                src="images/svgs/star_fill.svg"
+                src="/images/svgs/star_fill.svg"
                 alt="rating"
                 className="course-box__star"
               />
               <img
-                src="images/svgs/star_fill.svg"
+                src="/images/svgs/star_fill.svg"
                 alt="rating"
                 className="course-box__star"
               />
