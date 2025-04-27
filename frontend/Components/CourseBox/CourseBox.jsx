@@ -1,15 +1,28 @@
+import { useState } from "react";
 import "./CourseBox.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from '@mui/material/Box';
 
 const CourseBox = () => {
+  const [isImgShow, setIsImgShow] = useState(false);
+  const onImageLoaded = () => setIsImgShow(true);
+
   return (
     <div className="col-4">
       <div className="course-box">
         <a href="#">
           <img
             src="/images/courses/fareelancer.png"
-            alt="Course img"
+            alt=""
             className="course-box__img"
+            onLoad={onImageLoaded}
           />
+          {!isImgShow && (
+            <Box sx={{ display: "flex", justifyContent:"center"
+            ,alignItems:"center"}}>
+              <CircularProgress color="success" />
+            </Box>
+          )}
         </a>
         <div className="course-box__main">
           <a href="#" className="course-box__title">

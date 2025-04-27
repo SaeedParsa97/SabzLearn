@@ -1,0 +1,6 @@
+.successBtn{
+    background-color: var(--primary-color) !important;
+}
+.errorBtn{
+    background-color: red !important;
+}
