@@ -13,8 +13,17 @@ import {
   maxValidator,
   emailValidator,
 } from "./../../src/validators/rules";
+import { useContext, useState } from "react";
+import AuthContext from "../../src/context/authCpontext";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [isGoogleRecaptchVerify, setIGoogleRecaptchVerify] = useState(false);
+
   // ----------custom hook to get inputs value.
   const [formState, onInputHandler] = useForm(
     {
@@ -35,9 +44,54 @@ const Login = () => {
 
   const userLogin = (event) => {
     event.preventDefault();
-    console.log("user Login");
-    console.log(formState.isFormValid);
+
+    const userData = {
+      identifier: formState.inputs.username.value,
+      password: formState.inputs.password.value,
+    };
+
+    fetch(`http://localhost:4000/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          return response.text.then((text) => {
+            throw new Error(text);
+          });
+        } else {
+          return response.json();
+        }
+      })
+      .then((result) => {
+        swal({
+          title: "با موفقیت لاگین شدید",
+          icon: "success",
+          buttons: "ورود به پنل",
+        }).then((value) => {
+          navigate("/");
+        });
+
+        authContext.login({}, result.accessToken);
+      })
+      .catch((err) => {
+        swal({
+          title: " همچین کاربری یافت نشد.",
+          icon: "error",
+          buttons: "تلاش دوباره",
+        });
+      });
   };
+
+  const onChangeHandler = () => {
+    console.log("google recaptch is confirmed");
+    setIGoogleRecaptchVerify(true);
+  };
+
   return (
     <>
       <Topbar />
@@ -88,14 +142,21 @@ const Login = () => {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-
+            <div className="login-form__recaptcha">
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChangeHandler}
+              />
+            </div>
             <Button
               className={`login-form__btn ${
-                formState.isFormValid ? "successBtn" : "errorBtn"
+                formState.isFormValid && isGoogleRecaptchVerify
+                  ? "successBtn"
+                  : "errorBtn"
               }`}
               type="submit"
               onClick={userLogin}
-              disabled={!formState.isFormValid}
+              disabled={(!formState.isFormValid || !isGoogleRecaptchVerify)}
             >
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>

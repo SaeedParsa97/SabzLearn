@@ -1,0 +1,11 @@
+{
+    "workbench.colorTheme": "Andromeda Colorizer",
+    "workbench.preferredLightColorTheme": "Default Dark Modern",
+    "workbench.preferredHighContrastColorTheme": "Activate SCARLET protocol (beta)",
+    "workbench.preferredDarkColorTheme": "Activate SCARLET protocol (beta)",
+    "workbench.editor.autoLockGroups": {
+        "jsProfileVisualizer.cpuprofile.table": true
+    },
+    "screencastMode.fontSize": 59,
+    "accessibility.signalOptions.volume": 65
+}

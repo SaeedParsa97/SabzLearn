@@ -151,3 +151,22 @@
   }
   /* ============================== Login-Register Style ============================== */
   
+  
+  /* ============================== sweet alert Style ============================== */
+  
+  .swal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.swal-button{
+  background-color: #2bce56
+}
+  /* ============================== sweet alert Style ============================== */
+  /* ============================== form__recaptcha style================ */
+
+  .login-form__recaptcha{
+    display: flex;
+    justify-content: center;
+  }
+  /* ============================== form__recaptcha style================ */

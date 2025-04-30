@@ -12,10 +12,15 @@ import {
   maxValidator,
   emailValidator,
 } from "../../src/validators/rules";
-
 import "./Register.css";
+import { useContext } from "react";
+import AuthContext from "../../src/context/authCpontext";
 
 export default function Register() {
+
+  const authContext = useContext(AuthContext)
+  console.log(authContext);
+  
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -60,10 +65,11 @@ export default function Register() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
+        authContext.login(result.user, result.accessToken)
       });
 
-    console.log("User Register", newUserInfos);
+    // console.log("User Register", newUserInfos);
   };
 
   return (
